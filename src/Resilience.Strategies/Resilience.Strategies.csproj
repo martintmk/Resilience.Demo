@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Resilience.Strategies</AssemblyName>
+    <RootNamespace>Resilience.Strategies</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Resilience.Abstractions\Resilience.Abstractions.csproj" />
+    <ProjectReference Include="..\Resilience\Resilience.csproj" />
+  </ItemGroup>
+
+</Project>

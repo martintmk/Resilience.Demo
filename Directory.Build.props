@@ -1,0 +1,52 @@
+<Project>
+  <!-- build control -->
+  <PropertyGroup>
+    <TargetFrameworks>net7.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <RunSettingsFilePath>$(MSBuildThisFileDirectory)\eng\Common.runsettings</RunSettingsFilePath>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <Deterministic>true</Deterministic>
+    <DebugType>portable</DebugType>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <ImplicitUsings>true</ImplicitUsings>
+  </PropertyGroup>
+
+  <!-- packaging control -->
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <!-- version injection from builds -->
+  <PropertyGroup>
+    <Version Condition=" '$(BUILD_BUILDNUMBER)' == '' ">1.0.0.0</Version>
+    <Version Condition=" '$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</Version>
+  </PropertyGroup>
+
+  <!-- packaging metadata -->
+  <PropertyGroup>
+    <Product>Resilience Demo</Product>
+  </PropertyGroup>
+
+  <!-- Warning stuff -->
+  <PropertyGroup>
+    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);NETSDK1138;MSB3270;CA1014</MSBuildWarningsAsMessages>
+    <WarningLevel>5</WarningLevel>
+
+    <!-- This is false for local development, but set to true in the CI system -->
+    <TreatWarningsAsErrors Condition=" '$(TreatWarningsAsErrors)' == '' ">false</TreatWarningsAsErrors>
+
+    <!-- https://github.com/dotnet/sdk/issues/12981 -->
+    <NoWarn>$(NoWarn);NU5104;NU5128;CS1591</NoWarn>
+
+    <!-- prevent analyzer crashes from stopping things -->
+    <NoWarn>$(NoWarn);AD0001</NoWarn>
+  </PropertyGroup>
+
+  <!-- Static Analyzers -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,27 @@
+<Project>
+  <PropertyGroup>
+    <MicrosoftExtensionsVersion>7.0.0</MicrosoftExtensionsVersion>
+  </PropertyGroup>
+  <!-- Microsoft.Extensions -->
+  <ItemGroup>
+    <PackageVersion Include="BenchmarkDotNet" Version="0.13.2" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.ObjectPool" Version="7.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Polly" Version="7.2.3" />
+  </ItemGroup>
+  <!-- Test packages -->
+  <ItemGroup>
+    <PackageVersion Include="FluentAssertions" Version="6.8.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
+    <PackageVersion Include="Moq" Version="4.18.2" />
+    <PackageVersion Include="xunit" Version="2.4.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers" Version="2.4.5" />
+  </ItemGroup>
+  <!--Analyzers-->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.0" />
+  </ItemGroup>
+</Project>
