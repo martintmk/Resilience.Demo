@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bench", "bench", "{4C7B54C9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resilience.Strategies.Bench", "bench\Resilience.Strategies.Bench\Resilience.Strategies.Bench.csproj", "{DD00DD81-ECD1-45C3-9406-59A9C4DA3749}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resilience.Polly", "src\Resilience.Polly\Resilience.Polly.csproj", "{7D1CB040-08F8-4E5A-9CA7-8E18027E36E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{DD00DD81-ECD1-45C3-9406-59A9C4DA3749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD00DD81-ECD1-45C3-9406-59A9C4DA3749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD00DD81-ECD1-45C3-9406-59A9C4DA3749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D1CB040-08F8-4E5A-9CA7-8E18027E36E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D1CB040-08F8-4E5A-9CA7-8E18027E36E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D1CB040-08F8-4E5A-9CA7-8E18027E36E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D1CB040-08F8-4E5A-9CA7-8E18027E36E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{8521D8A9-DCEA-42B8-B0FC-2A69C7E50B06} = {60E87520-C8FD-41D1-A4E2-7A7496B49C30}
 		{71FA5340-888C-4ACD-A179-A5AB0FF70FBE} = {60E87520-C8FD-41D1-A4E2-7A7496B49C30}
 		{DD00DD81-ECD1-45C3-9406-59A9C4DA3749} = {4C7B54C9-97B0-4613-BB12-5DCC7C9F8784}
+		{7D1CB040-08F8-4E5A-9CA7-8E18027E36E7} = {60E87520-C8FD-41D1-A4E2-7A7496B49C30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {279B436A-09D4-4F9F-B996-EE59192DAFFA}

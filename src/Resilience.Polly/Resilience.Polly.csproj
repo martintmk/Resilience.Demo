@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Resilience.Polly</AssemblyName>
+    <RootNamespace>Resilience.Polly</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleToDynamicProxyGenAssembly2 Remove="PollyExtensions.cs" />
+    <InternalsVisibleToDynamicProxyGenAssembly2 Remove="StrategyAsyncPolicy.cs" />
+    <InternalsVisibleToDynamicProxyGenAssembly2 Remove="StrategyAsyncPolicyT.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Polly" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Resilience.Abstractions\Resilience.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -183,5 +183,5 @@ The POC exposes the following resilience packages:
 
 - `Resilience.Abstractions`: contains `IResilienceStrategy` + extensions, `IResilienceStrategyProvider`.
 - `Resilience`: contains implementations, `IResiliencePipelineBuilder` + extensions.
-- `Resilience.Compatibility`: contains extensions and integration points with Polly.
+- `Resilience.Polly`: contains extensions and integration points with Polly.
 - `Resilience.Strategies`: contains implementations of built-in strategies (retry, bulkhead, timeout, hedging).
