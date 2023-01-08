@@ -106,57 +106,47 @@ This way, the responsibility of how to execute method is lifted from the user an
 
 The life of extensibility author is also simplified as he only maintains one implementation of strategy instead of multiple ones. See the duplications in [`Polly.Retry`](https://github.com/App-vNext/Polly/tree/master/src/Polly/Retry).
 
-### Creation and access to `IResilienceStrategy`
+### Creation of `IResilienceStrategy`
 
-This API integrates natively with DI and exposes a single `AddResilienceStrategy` extension method that returns a `IResilienceStrategyBuilder`. You can chain various extensions for `IResilienceStrategyBuilder` and build a pipeline of strategies:
+This API exposes the following classes and interfaces that can be used to create the resilience strategy:
 
-``` csharp
-IServiceCollection services = ... ;
-
-services
-    .AddResilienceStrategy("my-strategy")
-    .AddRetry()
-    .AddCircuitBreaker()
-    .AddTimeout(options => { ... });
-```
-
-To retrieve a resilience strategy:
-
-``` csharp
-IResilienceStrategyProvider provider = ... ;
-IResilienceStrategy strategy = provider.GetResilienceStrategy("my-strategy");
-```
-
-### Extensibility
-
-The resilience extensibility is simple. We just expose two `AddStrategy` extensions for `IResilienceStrategyBuilder`:
+- `IResilienceStrategyBuilder`
+- `ResilienceStrategyBuilder`: concrete implementation of `IResilienceStrategyBuilder`.
 
 ``` csharp
 public interface IResilienceStrategyBuilder
 {
-    public string StrategyName { get; }
+    ResilienceStrategyBuilderProperties Properties { get; set; }
 
-    public IServiceCollection Services { get; }
-}
+    IResilienceStrategyBuilder AddStrategy(IResilienceStrategy strategy, ResilienceStrategyProperties? properties = null);
 
-public class ResilienceStrategyBuilderContext
-{
-    public string StrategyName { get; }
+    IResilienceStrategyBuilder AddStrategy(Func<ResilienceStrategyBuilderContext, IResilienceStrategy> factory, ResilienceStrategyProperties? properties = null);
 
-    public string StrategyKey { get; }
-
-    public IServiceProvider ServiceProvider { get; }
-}
-
-public static class ResilienceStrategyBuilderExtensions
-{
-    public static IResilienceStrategyBuilder AddStrategy(this IResilienceStrategyBuilder builder, IResilienceStrategy strategy);
-
-    public static IResilienceStrategyBuilder AddStrategy(this IResilienceStrategyBuilder builder, Func<ResilienceStrategyBuilderContext, IResilienceStrategy> factory);
+    IResilienceStrategy Create(ResilienceStrategyInstanceProperties? properties = null);
 }
 ```
 
-The extensibility author uses `AddStrategy` extension to add support for custom strategies. Use  `IServiceCollection` to register any custom services and `IServiceProvider` to resolve them from DI.
+To create a strategy you chain various extensions for `IResilienceStrategyBuilder` followed by the `Create` call:
+
+Single strategy:
+
+``` csharp
+var resilienceStrategy = new ResilienceStrategyBuilder().AddRetry().Create();
+```
+
+Pipeline of strategies:
+
+``` csharp
+var resilienceStrategy = new ResilienceStrategyBuilder()
+    .AddRetry()
+    .AddCircuitBreaker()
+    .AddTimeout(options => { ... })
+    .Create();
+```
+
+### Extensibility
+
+The resilience extensibility is simple. You just expose new extensions for `IResilienceStrategyBuilder` that use the `IResilienceStrategyBuilder.AddStrategy` methods.
 
 ### Handling of different result types
 
@@ -181,7 +171,9 @@ In the preceding sample retry strategy handles 3 different types of results. Thi
 
 The POC exposes the following resilience packages:
 
-- `Resilience.Abstractions`: contains `IResilienceStrategy` + extensions, `IResilienceStrategyProvider`.
+- `Resilience.Abstractions`: contains `IResilienceStrategy` + extensions.
 - `Resilience`: contains implementations, `IResiliencePipelineBuilder` + extensions.
 - `Resilience.Polly`: contains extensions and integration points with Polly.
 - `Resilience.Strategies`: contains implementations of built-in strategies (retry, bulkhead, timeout, hedging).
+- `Resilience.DependencyInjection`: DI support.
+

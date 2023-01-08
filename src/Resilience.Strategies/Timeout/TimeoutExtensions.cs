@@ -1,21 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-
-namespace Resilience.Strategies.Timeout;
+﻿namespace Resilience.Strategies.Timeout;
 
 public static class TimeoutExtensions
 {
-    public static IResilienceStrategyBuilder AddTimeout(this IResilienceStrategyBuilder builder, string strategyName)
+    public static IResilienceStrategyBuilder AddTimeout(this IResilienceStrategyBuilder builder, Action< TimeoutStrategyOptions> configure, ResilienceStrategyProperties? properties = null)
     {
-        return builder.AddTimeout(strategyName, _ => { });
+        var options = new TimeoutStrategyOptions();
+        configure(options);
+
+        return builder.AddTimeout(options, properties);
     }
 
-    public static IResilienceStrategyBuilder AddTimeout(this IResilienceStrategyBuilder builder, string strategyName, Action<TimeoutStrategyOptions> configure)
+    public static IResilienceStrategyBuilder AddTimeout(this IResilienceStrategyBuilder builder, TimeoutStrategyOptions options, ResilienceStrategyProperties? properties = null)
     {
-        var name = builder.StrategyName + "-" + strategyName;
-
-        _ = builder.Services.Configure(name, configure);
-
-        return builder.AddStrategy(context => new TimeoutStrategy(context.ServiceProvider.GetRequiredService<IOptionsMonitor<TimeoutStrategyOptions>>().Get(name)));
+        return builder.AddStrategy(context => new TimeoutStrategy(options), properties);
     }
 }

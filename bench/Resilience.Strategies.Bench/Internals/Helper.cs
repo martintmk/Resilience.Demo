@@ -44,12 +44,8 @@ internal static partial class Helper
 
     private static IResilienceStrategy CreateStrategy(Action<IResilienceStrategyBuilder> configure)
     {
-        var builder = new ServiceCollection().AddResilienceStrategy("my-strategy");
+        var builder = new ResilienceStrategyBuilder();
         configure(builder);
-
-        return builder.Services
-            .BuildServiceProvider()
-            .GetRequiredService<IResilienceStrategyProvider>()
-            .GetResilienceStrategy("my-strategy");
+        return builder.Create();
     }
 }

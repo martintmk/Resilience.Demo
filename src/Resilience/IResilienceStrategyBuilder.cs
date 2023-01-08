@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace Resilience;
+﻿namespace Resilience;
 
 public interface IResilienceStrategyBuilder
 {
-    public string StrategyName { get; }
+    ResilienceStrategyBuilderProperties Properties { get; set; }
 
-    public IServiceCollection Services { get; }
+    IResilienceStrategyBuilder AddStrategy(IResilienceStrategy strategy, ResilienceStrategyProperties? properties = null);
+
+    IResilienceStrategyBuilder AddStrategy(Func<ResilienceStrategyBuilderContext, IResilienceStrategy> factory, ResilienceStrategyProperties? properties = null);
+
+    IResilienceStrategy Create(ResilienceStrategyInstanceProperties? properties = null);
 }

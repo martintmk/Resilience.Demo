@@ -26,28 +26,34 @@ internal static partial class Helper
 
             ResilienceTechnology.ResiliencePrototype => CreateStrategy(builder =>
             {
-                builder.AddTimeout("outer", options =>
-                {
-                    options.TimeoutInterval = outerTimeout;
-                    options.OnTimeout.Add(args => new ValueTask());
-                });
+                builder.AddTimeout(
+                    options =>
+                    {
+                        options.TimeoutInterval = outerTimeout;
+                        options.OnTimeout.Add(args => new ValueTask());
+                    },
+                    new ResilienceStrategyProperties { StartegyName = "outer" });
 
-                builder.AddRetry("retries", options =>
-                {
-                    options.ShouldRetry
-                        .Add(10)
-                        .AddException<InvalidOperationException>();
+                builder.AddRetry(
+                    options =>
+                    {
+                        options.ShouldRetry
+                            .Add(10)
+                            .AddException<InvalidOperationException>();
 
-                    options.RetryCount = 3;
-                    options.RetryDelayGenerator = attempt => delay;
-                    options.OnRetry.Add((args) => default(ValueTask));
-                });
+                        options.RetryCount = 3;
+                        options.RetryDelayGenerator = attempt => delay;
+                        options.OnRetry.Add((args) => default(ValueTask));
+                    },
+                    new ResilienceStrategyProperties { StartegyName = "retries" });
 
-                builder.AddTimeout("inner", options =>
-                {
-                    options.TimeoutInterval = innerTimeout;
-                    options.OnTimeout.Add(args => new ValueTask());
-                });
+                builder.AddTimeout(
+                    options =>
+                    {
+                        options.TimeoutInterval = innerTimeout;
+                        options.OnTimeout.Add(args => new ValueTask());
+                    },
+                    new ResilienceStrategyProperties { StartegyName = "inner" });
             }),
             _ => throw new NotImplementedException()
         };

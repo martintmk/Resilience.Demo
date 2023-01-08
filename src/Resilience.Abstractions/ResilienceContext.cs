@@ -20,10 +20,6 @@ public sealed class ResilienceContext
 
     public bool ContinueOnCapturedContext { get; set; }
 
-    public string StrategyName { get; set; } = string.Empty;
-
-    public string StrategyKey { get; set; } = string.Empty;
-
     public static ResilienceContext Get(CancellationToken cancellationToken = default)
     {
         var context = s_pool.Get();
@@ -43,7 +39,5 @@ public sealed class ResilienceContext
         IsVoid = false;
         IsSynchronous = false;
         ContinueOnCapturedContext = false;
-        StrategyKey = string.Empty;
-        StrategyName = string.Empty;
     }
 }

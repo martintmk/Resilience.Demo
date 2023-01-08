@@ -2,16 +2,19 @@
 
 public class ResilienceStrategyBuilderContext
 {
-    internal ResilienceStrategyBuilderContext(string strategyName, string strategyKey, IServiceProvider serviceProvider)
+    public ResilienceStrategyBuilderContext(
+        ResilienceStrategyBuilderProperties builderProperties,
+        ResilienceStrategyProperties strategyProperties,
+        ResilienceStrategyInstanceProperties instanceProperties)
     {
-        StrategyName = strategyName;
-        StrategyKey = strategyKey;
-        ServiceProvider = serviceProvider;
+        BuilderProperties = builderProperties;
+        StrategyProperties = strategyProperties;
+        InstanceProperties = instanceProperties;
     }
 
-    public string StrategyName { get; }
+    public ResilienceStrategyBuilderProperties BuilderProperties { get; }
 
-    public string StrategyKey { get; }
+    public ResilienceStrategyProperties StrategyProperties { get; }
 
-    public IServiceProvider ServiceProvider { get; }
+    public ResilienceStrategyInstanceProperties InstanceProperties { get; }
 }

@@ -16,7 +16,7 @@ internal static partial class Helper
 
             ResilienceTechnology.ResiliencePrototype => CreateStrategy(builder =>
             {
-                builder.AddTimeout("dummy", options =>
+                builder.AddTimeout(options =>
                 {
                     options.TimeoutInterval = timeout;
                     options.OnTimeout.Add(args => new ValueTask());

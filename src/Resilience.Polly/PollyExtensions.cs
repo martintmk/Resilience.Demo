@@ -23,9 +23,6 @@ public static class PollyExtensions
 
     public static ResilienceContext Update(this ResilienceContext context, Context pollyContext)
     {
-        context.StrategyKey = pollyContext.PolicyKey;
-        context.StrategyName = pollyContext.PolicyWrapKey;
-
         // TODO: more stuff later
 
         return context;
