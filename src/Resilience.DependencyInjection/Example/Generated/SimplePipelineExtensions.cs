@@ -14,7 +14,8 @@ using Resilience.Strategies.Timeout;
 
 namespace Resilience.DependencyInjection.Example.Generated;
 
-internal static class SimplePipelineExtensions
+// Generated Code
+internal static partial class SimplePipelineExtensions
 {
     public static IServiceCollection AddSimplePipeline(this IServiceCollection services, Action<SimplePipelineOptions>? configure = null, IConfigurationSection? section = null)
     {
